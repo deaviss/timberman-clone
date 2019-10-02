@@ -1,0 +1,1 @@
+define(["exports"],function(a){"use strict";Object.defineProperty(a,"__esModule",{value:!0}),a.HpBar=void 0;a.HpBar=class{constructor(a){this.scene=a}init(){}create(){}update(){}}});

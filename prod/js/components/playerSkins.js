@@ -1,0 +1,1 @@
+define(["exports"],function(a){"use strict";Object.defineProperty(a,"__esModule",{value:!0}),a.PlayerSkins=void 0;a.PlayerSkins=class{constructor(a){this.scene=a,this.skins=[{name:"Lumbercwel 1",cost:1e3,color:15348431},{name:"Lumbercwel 2",cost:2e3,color:3386060},{name:"Lumbercwel 3",cost:3e3,color:16429517},{name:"Lumbercwel 4",cost:4e3,color:6710067}]}}});
