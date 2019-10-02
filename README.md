@@ -9,7 +9,7 @@ Basically just clone the repo, set up chrome-server and you're done.
 	• Score
 	• Highscore (saved in localStorage)  
 	• Coins (saved in localStorage) - after each game you play, score is added to coins  
-	• Health - it decreases each 50ms for 0.5. After each 5seconds the amount increases by 0.1. After player gets a point, hp goes up by 5.
+	• Health - it decreases each 50ms for 0.5. After each 5seconds the amount increases by 0.1. After player gets a point, hp goes up by 5.  
 	• Player can lose when he hits a branch
 2) World  
 	• Tree  
