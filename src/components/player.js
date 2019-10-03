@@ -3,15 +3,11 @@ import { PlayerSkins } from './playerSkins.js';
 export class Player {
 	constructor(scene, world) {
 		this.scene = scene;
-		this.ownedSkins = [{
+		this.ownedSkins = JSON.parse(localStorage.getItem('ownedSkins')) || [{
 			name: 'Lumbercwel 1',
 			color: 0xea32cf
-		}, {
-			name: 'Lumbercwel 2',
-			cost: 2000,
-			color: 0x33aacc
 		}]
-		this.currentSkin = this.ownedSkins[0];
+		this.currentSkin = JSON.parse(localStorage.getItem('currentSkin')) || this.ownedSkins[0];
 		var skins = new PlayerSkins(scene);
 		this.rectangle = this.scene.add.rectangle(150, 850, 82, 128, this.currentSkin.color);
 		this.score = 0;
@@ -63,14 +59,16 @@ export class Player {
 			this.hp -= this.hpStep / 2;
 		if (this.hp > 100)
 			this.hp = 100;
-		if (this.hp <= 0.5)
+		if (this.hp <= 0.5) {
 			this.hp = 0;
+			this.die();
+		}
 		this.hpBar.width = this.hp * 2;
 		this.hpText.text = `Hp: ${Math.round(this.hp)}/${this.maxHp}`
 	}
 
 	increaseStep() {
-		this.hpStep += 0.1
+		this.hpStep += 0.15
 	}
 
 	tap(side) {
@@ -137,6 +135,16 @@ export class Player {
 		if (this.hp > 0) {
 			this.hp += 5;
 		}
+	}
+
+	saveGame() {
+		localStorage.setItem('coins', this.coins);
+		localStorage.setItem('ownedSkins', JSON.stringify(this.ownedSkins))
+		localStorage.setItem('currentSkin', JSON.stringify(this.currentSkin))
+	}
+
+	updateSkin() {
+		this.rectangle.fillColor = this.currentSkin.color;
 	}
 
 }

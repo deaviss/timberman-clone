@@ -23,11 +23,12 @@ export class shopScene extends Phaser.Scene {
 			color: "#eaeaea"
 		}).onClick = () => {
 			self.scene.switch('menuScene');
+			self.player.updateSkin();
 		}
 	}
 
 	update() {
-
+		this.panel.update(this.info);
 	}
 
 }

@@ -103,23 +103,61 @@ export class UI_PANEL {
 		}
 
 		newTimber.cb = function () {
-			if (!this.bought) {
+			if (self.playerGold >= this.cost && !this.bought) {
+				console.log(`You have just bought ${this.name} for ${this.cost}`);
+				this.bought = true;
+				self.playerGold -= this.cost;
+				self.player.ownedSkins.push({
+					name: this.name,
+					color: this.color
+				})
 
-				if (self.playerGold >= this.cost) {
-					console.log(`You have just bought ${this.name} for ${this.cost}`);
-					this.bough = true;
-					self.playerGold -= this.cost;
-					self.player.ownedSkins.push({
+				this.text.text = `OWNED`
+			}
 
-					})
-				} else {
-					console.log(`You need ${this.cost - self.playerGold} more money!`);
+			if (self.player.currentSkin.name == this.name) {
+				this.used = true;
+			}
+			if (this.bought) {
+				console.log('zmieniam na ' + this.name)
+				self.player.currentSkin = {
+					name: this.name,
+					color: this.color
 				}
 			}
+			self.player.updateSkin();
+			self.player.saveGame();
+		}
+
+		if (self.player.ownedSkins.filter(x => { return x.name == newTimber.name }).length > 0) {
+			newTimber.bought = true;
 		}
 
 
 		this.addNewitem(newTimber)
+
+
+
+	}
+
+	update(info) {
+		var self = this;
+		info.text = `💰${this.playerGold}`
+		this.container.each(item => {
+			var data = item.data;
+			if (data) {
+				if (!data.bought) {
+					item.setAlpha(0.3)
+				} else {
+					item.setAlpha(0.7)
+					data.text.text = `OWNED`
+				}
+				if (data.name == self.player.currentSkin.name) {
+					item.setAlpha(1);
+					data.text.text = `SELECTED`
+				}
+			}
+		})
 	}
 
 
